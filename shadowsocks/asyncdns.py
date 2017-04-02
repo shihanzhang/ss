@@ -77,6 +77,7 @@ QTYPE_CNAME = 5
 QTYPE_NS = 2
 QCLASS_IN = 1
 
+
 def detect_ipv6_supprot():
     if 'has_ipv6' in dir(socket):
         try:
@@ -84,10 +85,13 @@ def detect_ipv6_supprot():
             s.connect(('::1', 0))
             print('IPv6 support')
             return True
-        except:
+        except Exception:
             pass
+        finally:
+            s.close()
     print('IPv6 not support')
     return False
+
 
 IPV6_CONNECTION_SUPPORT = detect_ipv6_supprot()
 
